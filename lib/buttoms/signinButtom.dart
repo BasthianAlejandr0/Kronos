@@ -10,7 +10,7 @@ class siginButtom extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all<Color>(const Color.fromARGB(255, 144, 144, 144)),
+        backgroundColor: WidgetStateProperty.all<Color>(const Color.fromARGB(255, 0, 0, 0)),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(10)),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -21,7 +21,7 @@ class siginButtom extends StatelessWidget {
       onPressed: (){} ,
       child: Text(
         "Sign in",
-        style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+        style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
         )
       );
   }

@@ -10,12 +10,16 @@ class Idioma extends StatelessWidget {
         // Acción al presionar el botón
       },
       style: TextButton.styleFrom(
-        padding: EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
         // backgroundColor: Colors.blue, // Color de fondo si lo necesitas
       ),
       child: Row(
         children: [
           TextButton(
+            style: TextButton.styleFrom(
+              animationDuration: const Duration(milliseconds: 100),
+              splashFactory: InkRipple.splashFactory,
+            ),
             onPressed: () {           
             }, 
             child: Image.asset(
