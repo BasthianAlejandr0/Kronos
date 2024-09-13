@@ -106,13 +106,22 @@ class HomePage extends StatelessWidget {
               // Imagen centrada
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(
+                  Expanded(child: Center(
+                    child: Image.asset(
                     'assets/KronosLogo.png',
                     fit: BoxFit.contain,
                     height: 100,
+                    
                   ),
+                  ),
+                  ),
+                  Icon(
+                        Icons.person,
+                        size: 30,
+                      ),
+                      SizedBox(width: 10),
+                      loginButtom(),
                 ],
               ),
               const SizedBox(height: 20),
@@ -243,20 +252,6 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 50),
-              const Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.person,
-                        size: 30,
-                      ),
-                      SizedBox(width: 10),
-                      loginButtom(),
-                    ],
-                  ),
-                ],
-              ),
             ],
           ),
         ),
