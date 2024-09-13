@@ -8,6 +8,8 @@ import 'package:kronos_software/buttoms/homeButtomPAge.dart';
 import 'package:kronos_software/widgets/Idioma.dart';
 import 'package:kronos_software/widgets/ubicationsMaps.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatelessWidget {
     HomePage({super.key});
@@ -251,7 +253,52 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 100),
+              // IconButtons y BottomAppBar
+               Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    color: const Color.fromARGB(255, 75, 75, 75), // Color de fondo para depuración
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.email, color: Colors.white),
+                          onPressed: () {
+                            // Acción para el botón de email
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(FontAwesomeIcons.instagram, color: Colors.white),
+                          onPressed: () async {
+                            const url = 'https://www.instagram.com/fran_gom_/';
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'No pudo ingresar a la página web';
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  /* const SizedBox(height: 1) */
+                  BottomAppBar(
+                    color: const Color.fromARGB(255, 75, 75, 75),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        homeButtomPage(),
+                        proyectButtomPage(),
+                        joinusButtomPage(),
+                        institutionsButtomPage(),
+                        aboususButtomPage(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
