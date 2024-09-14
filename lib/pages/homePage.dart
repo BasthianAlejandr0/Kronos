@@ -42,6 +42,15 @@ class HomePage extends StatelessWidget {
     ),
   )..loadVideoById(videoId: "BEpcN-eE8ms");
 
+  final YoutubePlayerController _controller4 = YoutubePlayerController(
+    params: const YoutubePlayerParams(
+      showControls: true,
+      showFullscreenButton: true,
+      loop: true,
+      strictRelatedVideos: true,
+    ),
+  )..loadVideoById(videoId: "dQw4w9WgXcQ");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -143,38 +152,60 @@ class HomePage extends StatelessWidget {
                     fit: BoxFit.contain,
                     height: 100,
                   ),
-                  const SizedBox(width: 60),
-                  const SizedBox(
-                    width: 450,
+                  SizedBox(width: 100,), // Ajusta el espacio entre la imagen y el texto
+                  SizedBox(
+                    width: 500.0,
                     child: Text(
                       "The innovative device that will revolutionize education. Solve riddles, unleash your imagination, improve your logical-critical thinking, improve your social skills, improve your grades and much more. Sphinx is a device aimed at educational institutions.",
+                      //textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width < 600 ? 16 : 18, // Cambia el tamaño de fuente dependiendo del ancho de la pantalla
+                      ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 50),
               // CAJAS DE VIDEOS
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 300,
-                    height: 150,
-                    child: YoutubePlayerControllerProvider(
-                      controller: _controller1,
-                      child: YoutubePlayer(controller: _controller1),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  SizedBox(
-                    width: 300,
-                    height: 150,
-                    child: YoutubePlayerControllerProvider(
-                      controller: _controller2,
-                      child: YoutubePlayer(controller: _controller2),
-                    ),
-                  ),
-                ],
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  // Ajustar el ancho del video dependiendo del ancho disponible
+                  double videoWidth = constraints.maxWidth > 900
+                      ? 300
+                      : constraints.maxWidth / 3 - 20; // Divide el espacio disponible entre los videos
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: videoWidth,
+                        height: 250,
+                        child: YoutubePlayerControllerProvider(
+                          controller: _controller1,
+                          child: YoutubePlayer(controller: _controller1),
+                        ),
+                      ),
+                      SizedBox(width: 20),
+                      SizedBox(
+                        width: videoWidth,
+                        height: 250,
+                        child: YoutubePlayerControllerProvider(
+                          controller: _controller2,
+                          child: YoutubePlayer(controller: _controller2),
+                        ),
+                      ),
+                      SizedBox(width: 20),
+                      SizedBox(
+                        width: videoWidth,
+                        height: 250,
+                        child: YoutubePlayerControllerProvider(
+                          controller: _controller4,
+                          child: YoutubePlayer(controller: _controller4),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 50),
               Row(
@@ -182,8 +213,8 @@ class HomePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 400,
-                    height: 150,
+                    width: 500,
+                    height: 350,
                     child: Column(
                       children: [
                         YoutubePlayerControllerProvider(
@@ -224,7 +255,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(width: 20),
                   // Barra espaciadora ajustada
                   SizedBox(
-                    height: 180,
+                    height: 200,
                     child: VerticalDivider(
                       color: Color.fromARGB(255, 0, 0, 0),
                       thickness: 1,
@@ -272,7 +303,7 @@ class HomePage extends StatelessWidget {
                         IconButton(
                           icon: Icon(FontAwesomeIcons.instagram, color: Colors.white),
                           onPressed: () async {
-                            const url = 'https://www.instagram.com/fran_gom_/';
+                            const url = 'https://www.instagram.com/minerales.cl/';
                             if (await canLaunch(url)) {
                               await launch(url);
                             } else {
