@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
       loop: true,
       strictRelatedVideos: true,
     ),
-  )..loadVideoById(videoId: "dQw4w9WgXcQ");
+  )..loadVideoById(videoId: "MYPVQccHhAQ");
 
   @override
   Widget build(BuildContext context) {
