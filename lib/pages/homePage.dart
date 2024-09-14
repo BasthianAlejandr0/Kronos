@@ -1,3 +1,5 @@
+/* import 'dart:ffi';
+ */
 import 'package:flutter/material.dart';
 import 'package:kronos_software/buttoms/aboutusPageButtom.dart';
 import 'package:kronos_software/buttoms/institutionsButtomPage.dart';
@@ -54,9 +56,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 235, 235, 235),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 75, 75, 75),
+        backgroundColor: Color.fromARGB(255, 60, 60, 60),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -88,7 +90,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 88, 88, 88),
+                color: Color.fromARGB(255, 60, 60, 60),
               ),
               child: Image.asset(
                 "assets/KronosLogo.png",
@@ -124,8 +126,8 @@ class HomePage extends StatelessWidget {
                     fit: BoxFit.contain,
                     height: 100,
                     
-                  ),
-                  ),
+                      ),
+                    ),
                   ),
                   Icon(
                         Icons.person,
@@ -139,7 +141,7 @@ class HomePage extends StatelessWidget {
               const Text(
                 'Meet our last device',
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 44,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -150,16 +152,26 @@ class HomePage extends StatelessWidget {
                   Image.asset(
                     'assets/Sphinx.jpeg',
                     fit: BoxFit.contain,
-                    height: 100,
+                    height: 110,
                   ),
-                  SizedBox(width: 100,), // Ajusta el espacio entre la imagen y el texto
+                  SizedBox(width: 20,),
+                  SizedBox(
+                    height: 255,
+                    child: VerticalDivider(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      thickness: 2,
+                      width: 20, // Cambia el ancho del divisor
+                    ),
+                  ),
+                  SizedBox(width: 20,),
                   SizedBox(
                     width: 500.0,
                     child: Text(
                       "The innovative device that will revolutionize education. Solve riddles, unleash your imagination, improve your logical-critical thinking, improve your social skills, improve your grades and much more. Sphinx is a device aimed at educational institutions.",
                       //textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
                       style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width < 600 ? 16 : 18, // Cambia el tamaño de fuente dependiendo del ancho de la pantalla
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -177,32 +189,83 @@ class HomePage extends StatelessWidget {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: videoWidth,
-                        height: 250,
-                        child: YoutubePlayerControllerProvider(
-                          controller: _controller1,
-                          child: YoutubePlayer(controller: _controller1),
+                      Column(
+                      children: [
+                        SizedBox(
+                          width: videoWidth,
+                          height: 250,
+                          child: YoutubePlayerControllerProvider(
+                            controller: _controller1,
+                            child: YoutubePlayer(controller: _controller1),
+                          ),
+                        ), // Espacio entre el video y el texto
+                        Container(
+                          width: videoWidth,
+                          padding: const EdgeInsets.all(8.0),
+                          color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
+                          child: const Text(
+                            'Functionality',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 20),
-                      SizedBox(
-                        width: videoWidth,
-                        height: 250,
-                        child: YoutubePlayerControllerProvider(
-                          controller: _controller2,
-                          child: YoutubePlayer(controller: _controller2),
+                      ],
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: videoWidth,
+                          height: 250,
+                          child: YoutubePlayerControllerProvider(
+                            controller: _controller2,
+                            child: YoutubePlayer(controller: _controller2),
+                          ),
+                        ), // Espacio entre el video y el texto
+                        Container(
+                          width: videoWidth,
+                          padding: const EdgeInsets.all(8.0),
+                          color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
+                          child: const Text(
+                            'SPHINX',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 20),
-                      SizedBox(
-                        width: videoWidth,
-                        height: 250,
-                        child: YoutubePlayerControllerProvider(
-                          controller: _controller4,
-                          child: YoutubePlayer(controller: _controller4),
+                      ],
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      children: [
+                        SizedBox(
+                          width: videoWidth,
+                          height: 250,
+                          child: YoutubePlayerControllerProvider(
+                            controller: _controller4,
+                            child: YoutubePlayer(controller: _controller4),
+                          ),
+                        ), // Espacio entre el video y el texto
+                        Container(
+                          width: videoWidth,
+                          padding: const EdgeInsets.all(8.0),
+                          color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
+                          child: const Text(
+                            'Apply',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black),
+                          ),
                         ),
-                      ),
+                      ],
+                    ),
                     ],
                   );
                 },
@@ -239,7 +302,7 @@ class HomePage extends StatelessWidget {
                       Text(
                         "Since 202X the year",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 30,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
@@ -248,6 +311,10 @@ class HomePage extends StatelessWidget {
                         width: 250,
                         child: Text(
                           "We have been working on the development of innovative devices that will revolutionize the world. Sphinx is the first of many devices that we will launch.",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ],
@@ -255,10 +322,10 @@ class HomePage extends StatelessWidget {
                   SizedBox(width: 20),
                   // Barra espaciadora ajustada
                   SizedBox(
-                    height: 200,
+                    height: 255,
                     child: VerticalDivider(
                       color: Color.fromARGB(255, 0, 0, 0),
-                      thickness: 1,
+                      thickness: 2,
                       width: 20, // Cambia el ancho del divisor
                     ),
                   ),
@@ -270,7 +337,7 @@ class HomePage extends StatelessWidget {
                       Text(
                         "Where are we",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 30,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -290,20 +357,22 @@ class HomePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    color: const Color.fromARGB(255, 75, 75, 75), // Color de fondo para depuración
+                    color: Color.fromARGB(255, 60, 60, 60), // Color de fondo para depuración
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.email, color: Colors.white),
+                          iconSize: 30.0,
                           onPressed: () {
                             // Acción para el botón de email
                           },
                         ),
                         IconButton(
                           icon: Icon(FontAwesomeIcons.instagram, color: Colors.white),
+                          iconSize: 30.0,
                           onPressed: () async {
-                            const url = 'https://www.instagram.com/minerales.cl/';
+                            const url = 'https://www.instagram.com/kronosinnovations/';
                             if (await canLaunch(url)) {
                               await launch(url);
                             } else {
@@ -316,7 +385,7 @@ class HomePage extends StatelessWidget {
                   ),
                   /* const SizedBox(height: 1) */
                   BottomAppBar(
-                    color: const Color.fromARGB(255, 75, 75, 75),
+                    color: const Color.fromARGB(255, 60, 60, 60),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
