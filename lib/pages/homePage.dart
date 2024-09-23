@@ -150,7 +150,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/Sphinx.jpeg',
+                    'assets/SphinxSinFondo.png',
                     fit: BoxFit.contain,
                     height: 110,
                   ),
@@ -214,7 +214,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: 50),
                     Column(
                       children: [
                         SizedBox(
@@ -240,7 +240,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: 50),
                     Column(
                       children: [
                         SizedBox(
@@ -290,38 +290,50 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 50),
               // MAPA Y TEXTO "SINCE 202X THE YEAR"
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     children: [
                       // Texto "Since 202X the year"
-                      Text(
+                      const Text(
                         "Since 202X the year",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       SizedBox(
                         width: 250,
-                        child: Text(
-                          "We have been working on the development of innovative devices that will revolutionize the world. Sphinx is the first of many devices that we will launch.",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal,
-                          ),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "We have been working on the development of innovative devices that will revolutionize the world. Sphinx is the first of many devices that we will launch.",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(height: 10), // Espacio entre el texto y el botón
+                            ElevatedButton(onPressed: () async {
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.black, // Color del texto
+                              backgroundColor: Colors.white,  // Color del fondo del botón
+                            ), 
+                            child: const Text("Statistics"))
+                          ],
                         ),
-                      ),
+                      )
                     ],
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   // Barra espaciadora ajustada
-                  SizedBox(
+                  const SizedBox(
                     height: 255,
                     child: VerticalDivider(
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -329,9 +341,9 @@ class HomePage extends StatelessWidget {
                       width: 20, // Cambia el ancho del divisor
                     ),
                   ),
-                  SizedBox(width: 20), // Añade espacio después del divisor
+                  const SizedBox(width: 20), // Añade espacio después del divisor
                   // Mapa (o cualquier otro contenido)
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
@@ -351,7 +363,49 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 500,
+                    height: 350,
+                    child: Column(
+                      children: [
+                        const Text(
+                              "Stay With Us",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            const Text(
+                              "Register your institution with us ... your shpinx devices, improve the quality of leveling your students and increase the ... of your institution",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            ElevatedButton(onPressed: () async {
+
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white, // Color del texto
+                              backgroundColor: Colors.black,  // Color del fondo del botón
+                            ), 
+                            child: const Text("Contact us",
+                            style: TextStyle(
+                              fontSize: 17.0
+                            ),) 
+                            )
+                        ],
+                    ),
+                  ),
+                ],
+              ),
               // IconButtons y BottomAppBar
                Column(
                 mainAxisSize: MainAxisSize.min,

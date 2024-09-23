@@ -69,6 +69,7 @@ flutter:
   - assets/KronosBlanco.png
   - assets/reino-unido.png
   - assets/Sphinx.jpeg
+  - assets/SphinxSinFondo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
