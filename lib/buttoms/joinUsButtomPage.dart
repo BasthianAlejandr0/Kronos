@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronos_software/pages/AlumnoNoRegister.dart';
 
 class joinusButtomPage extends StatelessWidget {
   const joinusButtomPage({
@@ -11,7 +12,10 @@ class joinusButtomPage extends StatelessWidget {
         foregroundColor: Colors.white,
         shape: LinearBorder()
       ),
-      onPressed: () {},
+      onPressed: () async {
+        Navigator.push(context,
+        MaterialPageRoute(builder: (context) => Alumnonoregister()));
+      },
       child: const Text(
         'Join Us',
         style: TextStyle(

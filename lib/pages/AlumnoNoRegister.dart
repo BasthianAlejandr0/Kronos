@@ -1,5 +1,3 @@
-/* import 'dart:ffi';
- */
 import 'package:flutter/material.dart';
 import 'package:kronos_software/buttoms/aboutusPageButtom.dart';
 import 'package:kronos_software/buttoms/institutionsButtomPage.dart';
@@ -13,8 +11,8 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomePage extends StatelessWidget {
-    HomePage({super.key});
+class Alumnonoregister extends StatelessWidget {
+    Alumnonoregister({super.key});
 
 // Controladores para cada video
   final YoutubePlayerController _controller1 = YoutubePlayerController(
@@ -34,15 +32,6 @@ class HomePage extends StatelessWidget {
       strictRelatedVideos: true,
     ),
   )..cueVideoById(videoId: "5UktyVCfFUc");
-
-  final YoutubePlayerController _controller3 = YoutubePlayerController(
-    params: const YoutubePlayerParams(
-      showControls: true,
-      showFullscreenButton: true,
-      loop: true,
-      strictRelatedVideos: true,
-    ),
-  )..cueVideoById(videoId: "BEpcN-eE8ms");
 
   final YoutubePlayerController _controller4 = YoutubePlayerController(
     params: const YoutubePlayerParams(
@@ -116,50 +105,26 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              // Imagen centrada
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(child: Center(
-                    child: Image.asset(
-                    'assets/KronosLogo.png',
-                    fit: BoxFit.contain,
-                    height: 100,
-                    
+                  SizedBox(
+                    child: Text(
+                      "Sigue las siguientes instrucciones.",
+                      textAlign: TextAlign.left, // Alinea el texto para mejorar la presentación
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
-                  Icon(
-                        Icons.person,
-                        size: 30,
-                      ),
-                      SizedBox(width: 10),
-                      loginButtom(),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Meet our last device',
-                style: TextStyle(
-                  fontSize: 44,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/SphinxSinFondo.png',
-                    fit: BoxFit.contain,
-                    height: 110,
-                  ),
                   SizedBox(width: 20,),
                   SizedBox(
-                    height: 255,
+                    height: 150,
                     child: VerticalDivider(
                       color: Color.fromARGB(255, 0, 0, 0),
-                      thickness: 2,
+                      thickness: 3,
                       width: 20, // Cambia el ancho del divisor
                     ),
                   ),
@@ -167,10 +132,10 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     width: 500.0,
                     child: Text(
-                      "The innovative device that will revolutionize education. Solve riddles, unleash your imagination, improve your logical-critical thinking, improve your social skills, improve your grades and much more. Sphinx is a device aimed at educational institutions.",
+                      "1.- Llena el formulario. \n2.- Comunícate con el/la Director(a) de tu institución. \n3.- Crea tu cuenta. \n4.- Pronto tendrás tus informes actualizados en tu perfil.",
                       //textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -203,14 +168,28 @@ class HomePage extends StatelessWidget {
                           width: videoWidth,
                           padding: const EdgeInsets.all(8.0),
                           color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
-                          child: const Text(
-                            'Functionality',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black),
-                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Formulario',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              ),
+                              SizedBox(height: 10.0),
+                              const Text(
+                                'Identificación de alumno',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black),
+                              ),
+                            ],
+                          )
                         ),
                       ],
                     ),
@@ -229,14 +208,28 @@ class HomePage extends StatelessWidget {
                           width: videoWidth,
                           padding: const EdgeInsets.all(8.0),
                           color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
-                          child: const Text(
-                            'SPHINX',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black),
-                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Crea tu cuenta',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              ),
+                              SizedBox(height: 10.0),
+                              const Text(
+                                'Crea tu cuenta de alumno',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black),
+                              ),
+                            ],
+                          )
                         ),
                       ],
                     ),
@@ -255,113 +248,34 @@ class HomePage extends StatelessWidget {
                           width: videoWidth,
                           padding: const EdgeInsets.all(8.0),
                           color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
-                          child: const Text(
-                            'Apply',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black),
-                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Preguntas y respuestas',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              ),
+                              SizedBox(height: 10.0),
+                              const Text(
+                                'Echa un vistazo a las preguntas más frecuentes',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black),
+                              ),
+                            ],
+                          )
                         ),
                       ],
                     ),
                     ],
                   );
                 },
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    width: 500,
-                    height: 350,
-                    child: Column(
-                      children: [
-                        YoutubePlayerControllerProvider(
-                          controller: _controller3,
-                          child: YoutubePlayer(controller: _controller3),
-                        ),
-                        ],
-                        
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 50),
-              // MAPA Y TEXTO "SINCE 202X THE YEAR"
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      // Texto "Since 202X the year"
-                      const Text(
-                        "Since 202X the year",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        width: 250,
-                        child: Column(
-                          children: [
-                            const Text(
-                              "We have been working on the development of innovative devices that will revolutionize the world. Sphinx is the first of many devices that we will launch.",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                            const SizedBox(height: 10), // Espacio entre el texto y el botón
-                            ElevatedButton(onPressed: () async {
-                            },
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.black, // Color del texto
-                              backgroundColor: Colors.white,  // Color del fondo del botón
-                            ), 
-                            child: const Text("Statistics"))
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(width: 20),
-                  // Barra espaciadora ajustada
-                  const SizedBox(
-                    height: 255,
-                    child: VerticalDivider(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      thickness: 2,
-                      width: 20, // Cambia el ancho del divisor
-                    ),
-                  ),
-                  const SizedBox(width: 20), // Añade espacio después del divisor
-                  // Mapa (o cualquier otro contenido)
-                  const Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Where are we",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      SizedBox(
-                        width: 250,
-                        height: 200,
-                        child: UbicationMaps(),
-                      ),
-                    ],
-                  ),
-                ],
               ),
               const SizedBox(height: 40),
               Row(
@@ -374,7 +288,7 @@ class HomePage extends StatelessWidget {
                     child: Column(
                       children: [
                         const Text(
-                              "Stay With Us",
+                              "Gracias!",
                               style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold,
@@ -382,13 +296,13 @@ class HomePage extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             const Text(
-                              "Register your institution with us ... your shpinx devices, improve the quality of leveling your students and increase the ... of your institution",
+                            "Por formar parte del desarrollo del proyecto SPHINX.\nJuntos mejoramos la educación",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 20),
                             ElevatedButton(onPressed: () async {
 
                             },
@@ -396,7 +310,7 @@ class HomePage extends StatelessWidget {
                               foregroundColor: Colors.white, // Color del texto
                               backgroundColor: Colors.black,  // Color del fondo del botón
                             ), 
-                            child: const Text("Contact us",
+                            child: const Text("Contáctanos",
                             style: TextStyle(
                               fontSize: 17.0
                             ),) 
