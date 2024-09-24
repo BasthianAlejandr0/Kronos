@@ -58,6 +58,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 235, 235, 235),
       appBar: AppBar(
+        toolbarHeight: 80.0,
         backgroundColor: Color.fromARGB(255, 60, 60, 60),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +66,7 @@ class HomePage extends StatelessWidget {
             Image.asset(
               'assets/KronosBlanco.png',
               fit: BoxFit.contain,
-              height: 110,
+              height: 150,
             ),
             const SizedBox(width: 50),
             const Expanded(
@@ -117,46 +118,63 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: [
               // Imagen centrada
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Stack(
                 children: [
-                  Expanded(child: Center(
-                    child: Image.asset(
+                  //Spacer(),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Center(
+                    child:
+                    Image.asset(
                     'assets/KronosLogo.png',
                     fit: BoxFit.contain,
-                    height: 100,
-                    
+                    height: 150,
                       ),
                     ),
                   ),
-                  Icon(
-                        Icons.person,
-                        size: 30,
-                      ),
-                      SizedBox(width: 10),
-                      loginButtom(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                              Icons.person,
+                              size: 50,
+                            ),
+                        SizedBox(width: 10),
+                        loginButtom(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 20),
-              const Text(
-                'Meet our last device',
-                style: TextStyle(
-                  fontSize: 44,
-                  fontWeight: FontWeight.normal,
-                ),
+              const SizedBox(height: 25),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Meet our last device',
+                    style: TextStyle(
+                      fontSize: 44,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 20),
+
+              const SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
                     'assets/SphinxSinFondo.png',
                     fit: BoxFit.contain,
-                    height: 110,
+                    height: 150,
                   ),
                   SizedBox(width: 20,),
                   SizedBox(
-                    height: 255,
+                    height: 160,
                     child: VerticalDivider(
                       color: Color.fromARGB(255, 0, 0, 0),
                       thickness: 2,
@@ -168,7 +186,7 @@ class HomePage extends StatelessWidget {
                     width: 500.0,
                     child: Text(
                       "The innovative device that will revolutionize education. Solve riddles, unleash your imagination, improve your logical-critical thinking, improve your social skills, improve your grades and much more. Sphinx is a device aimed at educational institutions.",
-                      //textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
+                      textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.normal,
@@ -201,8 +219,16 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
+                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black
+                                ),
+                                ]
+                          ),
                           padding: const EdgeInsets.all(8.0),
-                          color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
+                          //color: , // Cambia el color de fondo del recuadro si lo deseas
                           child: const Text(
                             'Functionality',
                             textAlign: TextAlign.center,
@@ -214,7 +240,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 50),
+                    SizedBox(width: 80),
                     Column(
                       children: [
                         SizedBox(
@@ -227,10 +253,17 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
+                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black
+                                ),
+                                ]
+                          ),
                           padding: const EdgeInsets.all(8.0),
-                          color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
                           child: const Text(
-                            'SPHINX',
+                            'Sphinx',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 18,
@@ -240,7 +273,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(width: 50),
+                    SizedBox(width: 80),
                     Column(
                       children: [
                         SizedBox(
@@ -253,8 +286,15 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
+                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black
+                                ),
+                                ]
+                          ),
                           padding: const EdgeInsets.all(8.0),
-                          color: Color.fromARGB(255, 180, 176, 176), // Cambia el color de fondo del recuadro si lo deseas
                           child: const Text(
                             'Apply',
                             textAlign: TextAlign.center,
@@ -270,7 +310,7 @@ class HomePage extends StatelessWidget {
                   );
                 },
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 80),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -312,6 +352,7 @@ class HomePage extends StatelessWidget {
                         child: Column(
                           children: [
                             const Text(
+                              textAlign: TextAlign.justify,
                               "We have been working on the development of innovative devices that will revolutionize the world. Sphinx is the first of many devices that we will launch.",
                               style: TextStyle(
                                 fontSize: 18,
@@ -363,7 +404,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 80),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -381,8 +422,9 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 10),
-                            const Text(
-                              "Register your institution with us ... your shpinx devices, improve the quality of leveling your students and increase the ... of your institution",
+                            Text(
+                              textAlign: TextAlign.center,
+                              "Register your institution with us cuote your shpinx devices, improve the quality of leveling your students and increase the ranking of your institution",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.normal,
@@ -407,52 +449,56 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               // IconButtons y BottomAppBar
-               Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    color: Color.fromARGB(255, 60, 60, 60), // Color de fondo para depuración
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.email, color: Colors.white),
-                          iconSize: 30.0,
-                          onPressed: () {
-                            // Acción para el botón de email
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.instagram, color: Colors.white),
-                          iconSize: 30.0,
-                          onPressed: () async {
-                            const url = 'https://www.instagram.com/kronosinnovations/';
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            } else {
-                              throw 'No pudo ingresar a la página web';
-                            }
-                          },
-                        ),
-                      ],
+              
+               Padding(
+                 padding: const EdgeInsets.only(top: 1.0,bottom: 1.0),
+                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      color: Color.fromARGB(255, 60, 60, 60), // Color de fondo para depuración
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.email, color: Colors.white),
+                            iconSize: 30.0,
+                            onPressed: () {
+                              // Acción para el botón de email
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(FontAwesomeIcons.instagram, color: Colors.white),
+                            iconSize: 30.0,
+                            onPressed: () async {
+                              const url = 'https://www.instagram.com/kronosinnovations/';
+                              if (await canLaunch(url)) {
+                                await launch(url);
+                              } else {
+                                throw 'No pudo ingresar a la página web';
+                              }
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  /* const SizedBox(height: 1) */
-                  BottomAppBar(
-                    color: const Color.fromARGB(255, 60, 60, 60),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        homeButtomPage(),
-                        proyectButtomPage(),
-                        joinusButtomPage(),
-                        institutionsButtomPage(),
-                        aboususButtomPage(),
-                      ],
+                    /* const SizedBox(height: 1) */
+                    BottomAppBar(
+                      color: const Color.fromARGB(255, 60, 60, 60),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          homeButtomPage(),
+                          proyectButtomPage(),
+                          joinusButtomPage(),
+                          institutionsButtomPage(),
+                          aboususButtomPage(),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                               ),
+               ),
             ],
           ),
         ),

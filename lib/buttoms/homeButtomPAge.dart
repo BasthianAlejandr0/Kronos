@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kronos_software/pages/homePage.dart';
 
 class homeButtomPage extends StatelessWidget {
   const homeButtomPage({
@@ -12,12 +13,16 @@ class homeButtomPage extends StatelessWidget {
         foregroundColor: Colors.white,
         shape: LinearBorder()
       ),
-      onPressed: () {},
+      onPressed: () async {
+        Navigator.push(context,
+        MaterialPageRoute(builder: (context) => HomePage()));
+      },
       child: const Text(
         'Home',
         style: TextStyle(
           color: Colors.white,
           fontFamily: 'Times New Roman',
+          fontSize: 15.5
           ),
       ),
     );

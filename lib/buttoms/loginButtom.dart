@@ -23,6 +23,7 @@ class loginButtom extends StatelessWidget {
         "Log in",
         style: TextStyle(
           color: const Color.fromARGB(255, 0, 0, 0),
+          fontSize: 15.5
         ),
       ),
     );

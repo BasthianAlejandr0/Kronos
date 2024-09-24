@@ -20,6 +20,7 @@ class proyectButtomPage extends StatelessWidget {
         style: TextStyle(
           color: Colors.white,
           fontFamily: 'Times New Roman',
+          fontSize: 15.5
           ),
       ),
     );
