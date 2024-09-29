@@ -219,24 +219,44 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black
-                                ),
-                                ]
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          //color: , // Cambia el color de fondo del recuadro si lo deseas
-                          child: const Text(
-                            'Functionality',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black),
-                          ),
+                          child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Functionality',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            ),
+                            SizedBox(height: 10.0),
+                            const Text(
+                              'Technical functions',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black),
+                            ),
+                          ],
+                        )
                         ),
                       ],
                     ),
@@ -253,23 +273,44 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black
-                                ),
-                                ]
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          child: const Text(
-                            'Sphinx',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black),
-                          ),
+                          child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Sphinx',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            ),
+                            SizedBox(height: 10.0),
+                            const Text(
+                              'Device Introduction',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black),
+                            ),
+                          ],
+                        )
                         ),
                       ],
                     ),
@@ -286,23 +327,44 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black
-                                ),
-                                ]
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          child: const Text(
-                            'Apply',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black),
-                          ),
+                          child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Apply',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            ),
+                            SizedBox(height: 10.0),
+                            const Text(
+                              'How to apply Sphinx in a classroom',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black),
+                            ),
+                          ],
+                        )
                         ),
                       ],
                     ),
@@ -311,26 +373,72 @@ class HomePage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 80),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    width: 500,
-                    height: 350,
-                    child: Column(
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  // Ajustar el ancho del video dependiendo del ancho disponible
+                  double videoWidth = MediaQuery.of(context).size.width * 0.4;
+                  double videoHeight = MediaQuery.of(context).size.height * 0.4; // 80% del ancho de la pantalla
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Column(
                       children: [
-                        YoutubePlayerControllerProvider(
-                          controller: _controller3,
-                          child: YoutubePlayer(controller: _controller3),
+                        SizedBox(
+                          width: videoWidth,
+                          height: videoHeight,
+                          child: YoutubePlayerControllerProvider(
+                            controller: _controller3,
+                            child: YoutubePlayer(controller: _controller3),
+                          ),
+                        ), // Espacio entre el video y el texto
+                        Container(
+                          width: videoWidth,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
+                          ),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Video',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                            ),
+                            SizedBox(height: 10.0),
+                            const Text(
+                              'Video',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black),
+                            ),
+                          ],
+                        )
                         ),
-                        ],
-                        
+                      ],
                     ),
-                  ),
-                ],
+                    ],
+                  );
+                },
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 80),
               // MAPA Y TEXTO "SINCE 202X THE YEAR"
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -360,13 +468,21 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10), // Espacio entre el texto y el botón
-                            ElevatedButton(onPressed: () async {
-                            },
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.black, // Color del texto
-                              backgroundColor: Colors.white,  // Color del fondo del botón
-                            ), 
-                            child: const Text("Statistics"))
+                            ElevatedButton(
+                              onPressed: () async {
+                                // Acción del botón
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.black,  // Color del texto
+                                backgroundColor: Colors.white,  // Color del fondo del botón
+                                shadowColor: Colors.grey, // Color de la sombra con opacidad
+                                elevation: 8, // Altura de la sombra (cuanto mayor, más visible será la sombra)
+                              ),
+                              child: const Text(
+                                "Statistics",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
                           ],
                         ),
                       )
@@ -411,22 +527,22 @@ class HomePage extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 500,
-                    height: 350,
+                    //height: 250,
                     child: Column(
                       children: [
                         const Text(
                               "Stay With Us",
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 35,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(height: 10),
                             Text(
-                              textAlign: TextAlign.center,
+                              textAlign: TextAlign.justify,
                               "Register your institution with us cuote your shpinx devices, improve the quality of leveling your students and increase the ranking of your institution",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 19.0,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -436,7 +552,7 @@ class HomePage extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white, // Color del texto
-                              backgroundColor: Colors.black,  // Color del fondo del botón
+                              backgroundColor: Color.fromARGB(255, 39, 39, 39),  // Color del fondo del botón
                             ), 
                             child: const Text("Contact us",
                             style: TextStyle(
@@ -449,9 +565,9 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               // IconButtons y BottomAppBar
-              
+              SizedBox(height: 80.0),
                Padding(
-                 padding: const EdgeInsets.only(top: 1.0,bottom: 1.0),
+                 padding: const EdgeInsets.only(top:1.0,bottom: 1.0),
                  child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -497,7 +613,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ],
-                               ),
+                ),
                ),
             ],
           ),

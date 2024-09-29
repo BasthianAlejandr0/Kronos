@@ -168,13 +168,20 @@ class Alumnonoregister extends StatelessWidget {
                       ), // Espacio entre el video y el texto
                       Container(
                         width: videoWidth,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black
-                                ),
-                                ]
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
                           ),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -215,13 +222,20 @@ class Alumnonoregister extends StatelessWidget {
                       ), // Espacio entre el video y el texto
                       Container(
                         width: videoWidth,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black
-                                ),
-                                ]
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
                           ),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -262,13 +276,20 @@ class Alumnonoregister extends StatelessWidget {
                       ), // Espacio entre el video y el texto
                       Container(
                         width: videoWidth,
-                          decoration: BoxDecoration(color: Color.fromARGB(255, 180, 176, 176),
-                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5) ,bottomRight: Radius.circular(5)),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 180, 176, 176),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(5),
+                              bottomRight: Radius.circular(5),
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black
-                                ),
-                                ]
+                                color: Colors.grey,
+                                spreadRadius: 2, // Propagación de la sombra
+                                blurRadius: 5, // Difuminado de la sombra
+                                offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                              ),
+                            ],
                           ),
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -300,14 +321,13 @@ class Alumnonoregister extends StatelessWidget {
                 );
               },
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 80),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
                   width: 500,
-                  height: 350,
                   child: Column(
                     children: [
                       const Text(
@@ -343,6 +363,7 @@ class Alumnonoregister extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 80.0,),
             // IconButtons y BottomAppBar
              Column(
               mainAxisSize: MainAxisSize.min,

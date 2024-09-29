@@ -20,14 +20,30 @@ class Idioma extends StatelessWidget {
               animationDuration: const Duration(milliseconds: 100),
               splashFactory: InkRipple.splashFactory,
             ),
-            onPressed: () {           
-            }, 
-            child: Image.asset(
-            'assets/reino-unido.png',
-            width: 24,
-            height: 24,
-            
-          ),)
+            onPressed: () {
+              // Acción del botón
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min, // Ajusta el tamaño del Row al contenido
+              children: [
+                const Text(
+                  'ENG', 
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontFamily: 'Times New Roman', // Tamaño del texto
+                    color: Colors.white, // Color del texto
+                  ),
+                ),
+                const SizedBox(width: 8), // Espacio entre el texto y la imagen
+                Image.asset(
+                  'assets/reino-unido.png',
+                  width: 24,
+                  height: 24,
+                ),
+              ],
+            ),
+          )
+
         ],
       ),
     );
