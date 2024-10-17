@@ -13,8 +13,7 @@ class joinusButtomPage extends StatelessWidget {
         shape: LinearBorder()
       ),
       onPressed: () async {
-        Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Alumnonoregister()));
+        Navigator.pushNamed(context,'NoRegistrado');
       },
       child: const Text(
         'Join Us',

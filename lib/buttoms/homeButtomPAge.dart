@@ -14,8 +14,7 @@ class homeButtomPage extends StatelessWidget {
         shape: LinearBorder()
       ),
       onPressed: () async {
-        Navigator.push(context,
-        MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushNamed(context,'Home');
       },
       child: const Text(
         'Home',

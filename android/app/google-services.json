@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "156994713450",
+    "project_id": "kronosbysphinx",
+    "storage_bucket": "kronosbysphinx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156994713450:android:22146f7e15c8d256f65713",
+        "android_client_info": {
+          "package_name": "com.kronosbysphinx.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKhF5BEMSadojIjN9dyyCV3sZe3bnIt4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156994713450:android:783751dc7ee79e99f65713",
+        "android_client_info": {
+          "package_name": "com.kronosweb.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKhF5BEMSadojIjN9dyyCV3sZe3bnIt4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

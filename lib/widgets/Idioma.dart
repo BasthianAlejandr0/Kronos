@@ -1,51 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class Idioma extends StatelessWidget {
   const Idioma({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        // Acción al presionar el botón
+    return PopupMenuButton<String>(
+      onSelected: (String value) {
+        // Cambiar idioma según la opción seleccionada
+        if (value == 'es') {
+          context.setLocale(const Locale('es'));
+        } else if (value == 'en') {
+          context.setLocale(const Locale('en'));
+        }
       },
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.all(8.0),
-        // backgroundColor: Colors.blue, // Color de fondo si lo necesitas
-      ),
-      child: Row(
-        children: [
-          TextButton(
-            style: TextButton.styleFrom(
-              animationDuration: const Duration(milliseconds: 100),
-              splashFactory: InkRipple.splashFactory,
-            ),
-            onPressed: () {
-              // Acción del botón
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min, // Ajusta el tamaño del Row al contenido
-              children: [
-                const Text(
-                  'ENG', 
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontFamily: 'Times New Roman', // Tamaño del texto
-                    color: Colors.white, // Color del texto
-                  ),
-                ),
-                const SizedBox(width: 8), // Espacio entre el texto y la imagen
-                Image.asset(
-                  'assets/reino-unido.png',
-                  width: 24,
-                  height: 24,
-                ),
-              ],
-            ),
-          )
-
-        ],
-      ),
+      icon: const Icon(
+        Icons.language,
+        color: Colors.white,
+        ), // Icono que representará el menú desplegable
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        PopupMenuItem<String>(
+          value: 'en',
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/reino-unido.png', // Icono para inglés
+                width: 24,
+                height: 24,
+              ),
+              const SizedBox(width: 10),
+              const Text("ENG", style: TextStyle(fontSize: 20)),
+            ],
+          ),
+        ),
+        PopupMenuItem<String>(
+          value: 'es',
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/España.png', // Icono para español
+                width: 24,
+                height: 24,
+              ),
+              const SizedBox(width: 10),
+              const Text("ESP", style: TextStyle(fontSize: 20)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
