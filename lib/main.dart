@@ -3,25 +3,20 @@ import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kronos_software/firebase_options.dart';
 
 import 'pages/homePage.dart';
 import 'pages/SphinxPage.dart';
 import 'pages/adminPage.dart';
-import 'pages/profilePage.dart';
 import 'pages/userRegister.dart';
 import 'pages/AlumnoNoRegister.dart';
+import 'pages/JoinToUs.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      appId: '1:297855924061:android:8b6a2f1f1f7f8d1b',
-      messagingSenderId: '297855924061',
-      projectId: 'kronos-software',
-      apiKey: 'AIzaSyD9Q-1J9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9Q9',
-      databaseURL: 'https://kronos-software.firebaseio.com',
-    ),
+    options: DefaultFirebaseOptions.currentPlatform
   );
   await EasyLocalization.ensureInitialized();
   runApp( 
@@ -55,10 +50,10 @@ class MyApp extends StatelessWidget {
       routes: {
         'Home': (context) =>  HomePage(),
         'Admin': (context) =>  const Adminpage(),
-        'Profile': (context) =>  const Profilepage(),
+        'Profile': (context) =>  Alumnonoregister(),
         'userRegister': (context) =>  const UserRegister(),
         'Sphinx': (context) =>   const AdminSphinx(),
-        'NoRegistrado': (context) => Alumnonoregister()
+        'JoinUs': (context) =>  JoinToUs(),
       },
     );
   }

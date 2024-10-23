@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kronos_software/pages/AlumnoNoRegister.dart';
 
 class joinusButtomPage extends StatelessWidget {
   const joinusButtomPage({
@@ -13,7 +12,7 @@ class joinusButtomPage extends StatelessWidget {
         shape: LinearBorder()
       ),
       onPressed: () async {
-        Navigator.pushNamed(context,'NoRegistrado');
+        Navigator.pushNamed(context,'JoinUs');
       },
       child: const Text(
         'Join Us',

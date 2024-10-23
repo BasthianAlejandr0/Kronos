@@ -13,7 +13,9 @@ class institutionsButtomPage extends StatelessWidget {
         foregroundColor: Colors.white,
         shape: LinearBorder()
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context,'Profile');
+      },
       child: const Text(
         'Institutions',
         style: TextStyle(

@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:excel/excel.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -16,62 +19,90 @@ class _ButtonExcel extends State<ButtomExcel> {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
 
-//Seleccionar archivo
-  Future selectFile() async{
-    // ignore: unused_local_variable
+
+Future<void> selectAndUploadFile(BuildContext context) async {
+  try {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
     if (result == null) {
+      showMessage(context, 'No se seleccionó ningún archivo.');
       return;
     }
-    setState(() {
-      pickedFile = result.files.first;
-    });
+    final pickedFile = result.files.first;
+    // Convertir a JSON
+    final jsonData = await excelToJson(pickedFile.bytes!);
+    // Subir a Firestore
+    await uploadJsonToFirestore(jsonData);
+    // Mostrar éxito
+    showMessage(context, 'Archivo subido correctamente a Firestore');
+
+  } catch (e) {
+    // Manejar errores
+    showMessage(context, 'Error al subir el archivo: $e');
   }
+}
+Future<Map<String, dynamic>> excelToJson(Uint8List fileBytes) async {
+  var excel = Excel.decodeBytes(fileBytes);
+  Map<String, dynamic> jsonData = {};
 
-//Subir archivo
-  Future uploadFile() async{
-    final path= 'Files/${pickedFile!.name}';
-    final file = File(pickedFile!.path!);
+  for (var table in excel.tables.keys) {
+    var sheet = excel.tables[table];
 
-    final ref= FirebaseStorage.instance.ref().child(path);
+    if (sheet == null || sheet.rows.isEmpty) continue;
 
-    setState(() {
-      uploadTask = ref.putFile(file);
-    });
-    
-    uploadTask= ref.putFile(file);
+    // La primera fila se toma como los encabezados
+    var headers = sheet.rows[0].map((cell) => cell?.value?.toString() ?? '').toList();
 
-    final snapshot= await uploadTask!.whenComplete(() => null);
+    // Procesamos las filas siguientes
+    for (var i = 1; i < sheet.rows.length; i++) {
+      var row = sheet.rows[i];
+      Map<String, dynamic> rowData = {};
+      for (var j = 0; j < headers.length; j++) {
+        if (j < row.length) {
+          // Asignamos el valor de la columna si existe, o vacío si no.
+          rowData[headers[j]] = row[j]?.value?.toString() ?? '';
+        } else {
+          // Si no hay valor en la celda, agregamos una cadena vacía
+          rowData[headers[j]] = '';
+        }
+      }
+      // Guardamos los datos de la fila en el JSON final
+      jsonData['Fila_$i'] = rowData;
+    }
+  }
+  return jsonData;
+}
 
-    final urlDownload= await snapshot.ref.getDownloadURL();
-
-    if (urlDownload != null) {
-      print('URL de descarga: $urlDownload');
-      setState(() {
-        uploadTask = null;
+Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
+  final firestore = FirebaseFirestore.instance;
+  // Aquí puedes elegir en qué colección guardar los datos
+  await firestore.collection('estudiantes').add(jsonData);
+}
+  
+  void showMessage(BuildContext context, String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // Iniciar el temporizador para cerrar el diálogo después de 2 segundos
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.of(context).pop(); // Cerrar el diálogo automáticamente
       });
-    }
-    else{
-      print('Error al subir el archivo');
-    }
-  }
-  
 
-  
+      return AlertDialog(
+        content: Text(message),
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ElevatedButton(
-            onPressed: selectFile,
+            onPressed: () => selectAndUploadFile(context),
             child: const Text("Seleccionar archivo Excel"),
           ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: uploadFile,
-          child: const Text("Cargar archivo Excel"),
-        ),
         const SizedBox(height: 20),
         if (uploadTask != null) buildProgress(),
       ],

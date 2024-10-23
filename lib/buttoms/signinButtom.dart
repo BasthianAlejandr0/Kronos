@@ -18,7 +18,9 @@ class siginButtom extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: (){} ,
+      onPressed: (){
+        Navigator.pushNamed(context,'userRegister');
+      } ,
       child: Text(
         "Sign in",
         style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),

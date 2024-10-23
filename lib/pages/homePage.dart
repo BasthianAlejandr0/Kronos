@@ -2,6 +2,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:kronos_software/buttoms/aboutusPageButtom.dart';
+import 'package:kronos_software/buttoms/drawerNavigator.dart';
 import 'package:kronos_software/buttoms/institutionsButtomPage.dart';
 import 'package:kronos_software/buttoms/joinUsButtomPage.dart';
 import 'package:kronos_software/buttoms/loginButtom.dart';
@@ -12,6 +13,8 @@ import 'package:kronos_software/widgets/ubicationsMaps.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../buttoms/signinButtom.dart';
 
 class HomePage extends StatelessWidget {
     HomePage({super.key});
@@ -85,75 +88,51 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 60, 60, 60),
-              ),
-              child: Image.asset(
-                "assets/KronosLogo.png",
-              ),
-            ),
-            const ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerNavigator(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              // Imagen centrada
-              Stack(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  //Spacer(),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Center(
-                    child:
-                    Image.asset(
-                    'assets/KronosLogo.png',
-                    fit: BoxFit.contain,
-                    height: 150,
-                      ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 200),
+                    child: Image.asset(
+                      'assets/KronosLogo.png',
+                      fit: BoxFit.contain,
+                      height: 130,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Icon(
-                              Icons.person,
-                              size: 50,
-                            ),
-                        SizedBox(width: 10),
-                        loginButtom(),
-                      ],
-                    ),
+                  const Spacer(),
+                  const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.person_2_rounded,
+                        size: 50,
+                      ),
+                      SizedBox(width: 10),
+                      Column(
+                        children: [
+                          loginButtom(),
+                          SizedBox(height: 10),
+                          siginButtom(),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
               const SizedBox(height: 25),
 
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Meet our last device',
                     style: TextStyle(
                       fontSize: 44,
@@ -173,7 +152,7 @@ class HomePage extends StatelessWidget {
                     height: 150,
                   ),
                   SizedBox(width: 20,),
-                  SizedBox(
+                  const SizedBox(
                     height: 160,
                     child: VerticalDivider(
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -182,7 +161,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 20,),
-                  SizedBox(
+                  const SizedBox(
                     width: 500.0,
                     child: Text(
                       "The innovative device that will revolutionize education. Solve riddles, unleash your imagination, improve your logical-critical thinking, improve your social skills, improve your grades and much more. Sphinx is a device aimed at educational institutions.",
@@ -219,7 +198,7 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 180, 176, 176),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(5),
@@ -235,10 +214,10 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'Functionality',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -247,7 +226,7 @@ class HomePage extends StatelessWidget {
                                 color: Colors.black),
                             ),
                             SizedBox(height: 10.0),
-                            const Text(
+                            Text(
                               'Technical functions',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -273,7 +252,7 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 180, 176, 176),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(5),
@@ -289,10 +268,10 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'Sphinx',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -301,7 +280,7 @@ class HomePage extends StatelessWidget {
                                 color: Colors.black),
                             ),
                             SizedBox(height: 10.0),
-                            const Text(
+                            Text(
                               'Device Introduction',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -327,7 +306,7 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 180, 176, 176),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(5),
@@ -343,10 +322,10 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'Apply',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -355,7 +334,7 @@ class HomePage extends StatelessWidget {
                                 color: Colors.black),
                             ),
                             SizedBox(height: 10.0),
-                            const Text(
+                            Text(
                               'How to apply Sphinx in a classroom',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -393,7 +372,7 @@ class HomePage extends StatelessWidget {
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 180, 176, 176),
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(5),
@@ -409,10 +388,10 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: const Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               'Video',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -421,7 +400,7 @@ class HomePage extends StatelessWidget {
                                 color: Colors.black),
                             ),
                             SizedBox(height: 10.0),
-                            const Text(
+                            Text(
                               'Video',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -538,7 +517,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 10),
-                            Text(
+                            const Text(
                               textAlign: TextAlign.justify,
                               "Register your institution with us cuote your shpinx devices, improve the quality of leveling your students and increase the ranking of your institution",
                               style: TextStyle(
@@ -548,7 +527,7 @@ class HomePage extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             ElevatedButton(onPressed: () async {
-
+                              Navigator.pushNamed(context,'NoRegistrado');
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white, // Color del texto
@@ -599,8 +578,8 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     /* const SizedBox(height: 1) */
-                    BottomAppBar(
-                      color: const Color.fromARGB(255, 60, 60, 60),
+                    const BottomAppBar(
+                      color: Color.fromARGB(255, 60, 60, 60),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
