@@ -12,10 +12,10 @@ class ButtomExcel extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _ButtonExcel createState() => _ButtonExcel();
+  _ButtomExcel createState() => _ButtomExcel();
 }
 
-class _ButtonExcel extends State<ButtomExcel> {
+class _ButtomExcel extends State<ButtomExcel> {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
 
