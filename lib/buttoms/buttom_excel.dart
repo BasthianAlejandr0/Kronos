@@ -100,8 +100,27 @@ Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
     return Column(
       children: [
         ElevatedButton(
-            onPressed: () => selectAndUploadFile(context),
-            child: const Text("Seleccionar archivo Excel"),
+              onPressed: () {
+              // Acción para subir archivo Excel
+              selectAndUploadFile(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 75, 75, 75),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              "Subir Excel",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
           ),
         const SizedBox(height: 20),
         if (uploadTask != null) buildProgress(),

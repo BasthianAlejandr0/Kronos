@@ -567,7 +567,6 @@ class JoinToUs extends StatelessWidget {
                             ),
                             SizedBox(height: 20),
                             ElevatedButton(onPressed: () async {
-          
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white, // Color del texto
