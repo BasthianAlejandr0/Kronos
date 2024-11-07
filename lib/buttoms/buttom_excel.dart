@@ -20,7 +20,7 @@ class _ButtomExcel extends State<ButtomExcel> {
   UploadTask? uploadTask;
 
 
-Future<void> selectAndUploadFile(BuildContext context) async {
+/* Future<void> selectAndUploadFile(BuildContext context) async {
   try {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
@@ -40,49 +40,36 @@ Future<void> selectAndUploadFile(BuildContext context) async {
     // Manejar errores
     showMessage(context, 'Error al subir el archivo: $e');
   }
-}
-/* Future<Map<String, dynamic>> excelToJson(Uint8List fileBytes) async {
-  var excel = Excel.decodeBytes(fileBytes);
-  Map<String, dynamic> jsonData = {};
-
-  for (var table in excel.tables.keys) {
-    var sheet = excel.tables[table];
-
-    if (sheet == null || sheet.rows.isEmpty) continue;
-
-    // La primera fila se toma como los encabezados
-    var headers = sheet.rows[0].map((cell) => cell?.value?.toString() ?? '').toList();
-
-    // Procesamos las filas siguientes
-    for (var i = 1; i < sheet.rows.length; i++) {
-      var row = sheet.rows[i];
-      Map<String, dynamic> rowData = {};
-      for (var j = 0; j < headers.length; j++) {
-        if (j < row.length) {
-          // Asignamos el valor de la columna si existe, o vacío si no.
-          rowData[headers[j]] = row[j]?.value?.toString() ?? '';
-        } else {
-          // Si no hay valor en la celda, agregamos una cadena vacía
-          rowData[headers[j]] = '';
-        }
-      }
-      // Guardamos los datos de la fila en el JSON final
-      jsonData['Fila_$i'] = rowData;
-    }
-  }
-  return jsonData;
-}
-
-Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
-  final firestore = FirebaseFirestore.instance;
-  // Aquí puedes elegir en qué colección guardar los datos
-  await firestore.collection('estudiantes').add(jsonData);
 } */
+
+Future<void> selectAndUploadFile(BuildContext context) async {
+  try {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if (result == null) {
+      showMessage(context, 'No se seleccionó ningún archivo.');
+      return;
+    }
+    final pickedFile = result.files.first;
+    // Obtener el nombre del archivo sin la extensión
+    String fileName = pickedFile.name.split('.').first;
+    // Convertir a JSON
+    final jsonData = await excelToJson(pickedFile.bytes!);
+    // Subir a Firestore usando el nombre del archivo como ID del documento
+    await uploadJsonToFirestore(jsonData, fileName);
+    // Mostrar éxito
+    showMessage(context, 'Archivo subido correctamente a Firestore');
+
+  } catch (e) {
+    // Manejar errores
+    showMessage(context, 'Error al subir el archivo: $e');
+  }
+}
+
   
   Future<Map<String, dynamic>> excelToJson(Uint8List fileBytes) async {
   var excel = Excel.decodeBytes(fileBytes);
   Map<String, dynamic> jsonData = {};
-  List<Map<String, dynamic>> rowsList = [];
 
   for (var table in excel.tables.keys) {
     var sheet = excel.tables[table];
@@ -92,32 +79,29 @@ Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
     // La primera fila se toma como los encabezados
     var headers = sheet.rows[0].map((cell) => cell?.value?.toString() ?? '').toList();
 
-    // Procesamos las filas siguientes
+    // Procesamos todas las filas y concatenamos los valores de cada celda con coma
     for (var i = 1; i < sheet.rows.length; i++) {
       var row = sheet.rows[i];
-      Map<String, dynamic> rowData = {};
       for (var j = 0; j < headers.length; j++) {
-        if (j < row.length) {
-          // Asignamos el valor de la columna si existe, o vacío si no.
-          rowData[headers[j]] = row[j]?.value?.toString() ?? '';
-        } else {
-          rowData[headers[j]] = '';
-        }
+        // Si el valor en jsonData[headers[j]] ya existe, concatenamos el valor con una coma
+        jsonData[headers[j]] = (jsonData[headers[j]] ?? '') + (jsonData[headers[j]]?.isEmpty ?? true ? '' : ', ') + (row[j]?.value?.toString() ?? '');
       }
-      rowsList.add(rowData);
     }
   }
-  
-  // Guardamos todas las filas en una lista dentro de `jsonData`
-  jsonData['datos'] = rowsList;
   return jsonData;
 }
 
-Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
+
+
+
+Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData, String fileName) async {
   final firestore = FirebaseFirestore.instance;
-  // Agrega los datos como un nuevo documento en la colección 'estudiantes'
-  await firestore.collection('estudiantes').add(jsonData);
+
+  // Usamos el nombre del archivo como nombre del documento en Firestore
+  await firestore.collection('instituciones').doc(fileName).set(jsonData);
 }
+
+
 
   void showMessage(BuildContext context, String message) {
   showDialog(

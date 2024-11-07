@@ -47,8 +47,13 @@ class JoinToUs extends StatelessWidget {
     ),
   )..cueVideoById(videoId: "MYPVQccHhAQ");
 
+
+
+
   @override
   Widget build(BuildContext context) {
+    final DateTime today = DateTime.now();
+    final DateTime maxDate = today.add(Duration(days: 14)); 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 235, 235, 235),
       appBar: AppBar(
@@ -218,6 +223,18 @@ class JoinToUs extends StatelessWidget {
                                       color: Colors.white,
                                     ),
                                     selectedDayButtonColor: Colors.blue,
+                                      minSelectedDate: today, // Fecha mínima seleccionable
+                                      maxSelectedDate: maxDate, // Fecha máxima seleccionable
+                                      showOnlyCurrentMonthDate: true, // Mostrar solo fechas del mes actual
+                                      onCalendarChanged: (DateTime date) {
+                                        if (date.isBefore(today) || date.isAfter(maxDate)) {
+                                          // Prevenir que el calendario se mueva fuera del rango permitido
+                                          // Regresar al mes actual
+                                          CalendarCarousel(
+                                            onDayPressed: (DateTime date, List events) {},
+                                          );
+                                        }
+                                      },
                                   ),
                                 ),
                               ],
@@ -567,6 +584,10 @@ class JoinToUs extends StatelessWidget {
                             ),
                             SizedBox(height: 20),
                             ElevatedButton(onPressed: () async {
+                              Navigator.pushReplacement(
+                                context, 
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => JoinToUs(),));
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white, // Color del texto

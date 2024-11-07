@@ -12,7 +12,34 @@ class AdminSphinx extends StatefulWidget {
 
   @override
   State<AdminSphinx> createState() => _AdminSphinx();
-}Future<void> createUsersForAllAlumnos(BuildContext context) async {
+}
+
+Future<void> getRutFromFirestore() async {
+  try {
+    // Referencia a la colección donde se guardaron los datos
+    final firestore = FirebaseFirestore.instance;
+    final collectionRef = firestore.collection('instituciones');  // Asegúrate de que esta sea la colección correcta
+
+    // Obtención de los documentos en la colección
+    final snapshot = await collectionRef.get();
+
+    // Lista para almacenar los valores de RUT
+    List<String> rutList = [];
+
+    // Iterar sobre los documentos y obtener el campo 'RUT'
+    for (var doc in snapshot.docs) {
+      if (doc.data().containsKey('RUT')) {
+        rutList.add(doc['RUT']);
+      }
+    }
+
+    // Mostrar la lista de RUT en la consola
+    print('RUTs encontrados: $rutList');
+  } catch (e) {
+    print('Error al obtener los datos de Firestore: $e');
+  }
+}
+/* Future<void> createUsersForAllAlumnos(BuildContext context) async {
     final alumnoCreate = AlumnoCreate();
     final firestore = FirebaseFirestore.instance;
     final Map<String, String> userCredentials = {};
@@ -45,7 +72,7 @@ class AdminSphinx extends StatefulWidget {
       // Manejar errores
       showMessage(context, 'Error al crear usuarios: $e');
     }
-  }
+  } */
 
   void showMessage(BuildContext context, String message) {
     showDialog(
@@ -156,7 +183,7 @@ class _AdminSphinx extends State<AdminSphinx> {
                     ElevatedButton(
                       onPressed: () async {
                         // Acción para crear usuario para cada alumno
-                        await createUsersForAllAlumnos(context);
+                        //await createUsersForAllAlumnos(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
@@ -283,8 +310,7 @@ class _AdminSphinx extends State<AdminSphinx> {
                           const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () async {
-                              // Acción para crear usuario para cada alumno
-                              await createUsersForAllAlumnos(context);
+                              getRutFromFirestore();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
