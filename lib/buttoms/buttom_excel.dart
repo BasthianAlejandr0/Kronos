@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excel/excel.dart';
@@ -41,7 +41,7 @@ Future<void> selectAndUploadFile(BuildContext context) async {
     showMessage(context, 'Error al subir el archivo: $e');
   }
 }
-Future<Map<String, dynamic>> excelToJson(Uint8List fileBytes) async {
+/* Future<Map<String, dynamic>> excelToJson(Uint8List fileBytes) async {
   var excel = Excel.decodeBytes(fileBytes);
   Map<String, dynamic> jsonData = {};
 
@@ -77,8 +77,48 @@ Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
   final firestore = FirebaseFirestore.instance;
   // Aquí puedes elegir en qué colección guardar los datos
   await firestore.collection('estudiantes').add(jsonData);
-}
+} */
   
+  Future<Map<String, dynamic>> excelToJson(Uint8List fileBytes) async {
+  var excel = Excel.decodeBytes(fileBytes);
+  Map<String, dynamic> jsonData = {};
+  List<Map<String, dynamic>> rowsList = [];
+
+  for (var table in excel.tables.keys) {
+    var sheet = excel.tables[table];
+
+    if (sheet == null || sheet.rows.isEmpty) continue;
+
+    // La primera fila se toma como los encabezados
+    var headers = sheet.rows[0].map((cell) => cell?.value?.toString() ?? '').toList();
+
+    // Procesamos las filas siguientes
+    for (var i = 1; i < sheet.rows.length; i++) {
+      var row = sheet.rows[i];
+      Map<String, dynamic> rowData = {};
+      for (var j = 0; j < headers.length; j++) {
+        if (j < row.length) {
+          // Asignamos el valor de la columna si existe, o vacío si no.
+          rowData[headers[j]] = row[j]?.value?.toString() ?? '';
+        } else {
+          rowData[headers[j]] = '';
+        }
+      }
+      rowsList.add(rowData);
+    }
+  }
+  
+  // Guardamos todas las filas en una lista dentro de `jsonData`
+  jsonData['datos'] = rowsList;
+  return jsonData;
+}
+
+Future<void> uploadJsonToFirestore(Map<String, dynamic> jsonData) async {
+  final firestore = FirebaseFirestore.instance;
+  // Agrega los datos como un nuevo documento en la colección 'estudiantes'
+  await firestore.collection('estudiantes').add(jsonData);
+}
+
   void showMessage(BuildContext context, String message) {
   showDialog(
     context: context,
