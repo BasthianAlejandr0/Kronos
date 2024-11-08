@@ -20,28 +20,6 @@ class _ButtomExcel extends State<ButtomExcel> {
   UploadTask? uploadTask;
 
 
-/* Future<void> selectAndUploadFile(BuildContext context) async {
-  try {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
-
-    if (result == null) {
-      showMessage(context, 'No se seleccionó ningún archivo.');
-      return;
-    }
-    final pickedFile = result.files.first;
-    // Convertir a JSON
-    final jsonData = await excelToJson(pickedFile.bytes!);
-    // Subir a Firestore
-    await uploadJsonToFirestore(jsonData);
-    // Mostrar éxito
-    showMessage(context, 'Archivo subido correctamente a Firestore');
-
-  } catch (e) {
-    // Manejar errores
-    showMessage(context, 'Error al subir el archivo: $e');
-  }
-} */
-
 Future<void> selectAndUploadFile(BuildContext context) async {
   try {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);

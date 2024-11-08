@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../buttoms/alumnoCreate.dart';
 import '../buttoms/buttom_excel.dart';
@@ -14,7 +16,7 @@ class AdminSphinx extends StatefulWidget {
   State<AdminSphinx> createState() => _AdminSphinx();
 }
 
-Future<void> getRutFromFirestore() async {
+/* Future<void> getRutFromFirestore() async {
   try {
     // Referencia a la colección donde se guardaron los datos
     final firestore = FirebaseFirestore.instance;
@@ -38,41 +40,81 @@ Future<void> getRutFromFirestore() async {
   } catch (e) {
     print('Error al obtener los datos de Firestore: $e');
   }
-}
-/* Future<void> createUsersForAllAlumnos(BuildContext context) async {
-    final alumnoCreate = AlumnoCreate();
+} */
+
+String generateRandomPassword(int length) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final rand = Random();
+    return List.generate(length, (index) => chars[rand.nextInt(chars.length)]).join();
+  }
+
+Future<void> getRutAndGeneratePassword() async {
+  try {
     final firestore = FirebaseFirestore.instance;
-    final Map<String, String> userCredentials = {};
+    final collectionRef = firestore.collection('instituciones');
 
-    try {
-      // Obtener todos los documentos de la colección 'alumnos'
-      final querySnapshot = await firestore.collection('alumnos').get();
+    // Obtener todos los documentos de la colección 'instituciones'
+    final snapshot = await collectionRef.get();
 
-      for (var doc in querySnapshot.docs) {
-        var alumnoData = doc.data();
-        var rut = alumnoData['RUT'];
-        var password = alumnoCreate.generateRandomPassword(8); // Generar una contraseña aleatoria de 8 caracteres
+    for (var doc in snapshot.docs) {
+      if (doc.data().containsKey('RUT') && doc.data().containsKey('CORREO')) {
+        // Obtener los RUTs como una cadena y dividirlos por coma
+        String rutString = doc['RUT']; // Cadena de RUTs separados por coma
+        List<String> ruts = rutString.split(','); // Dividir la cadena en una lista de RUTs
 
-        // Agregar la contraseña al mapa de datos del alumno
-        alumnoData['password'] = password;
+        // Crear una nueva colección para cada institución dentro de la colección 'alumnos'
+        final institutionCollectionRef = firestore.collection('alumnos').doc(doc.id).collection('alumnos_ruts');
 
-        // Guardar los datos del alumno en Firestore usando el RUT como identificador
-        await firestore.collection('alumnos').doc(rut).set(alumnoData);
+        for (var rut in ruts) {
+          rut = rut.trim(); // Limpiar espacios adicionales
 
-        // Agregar las credenciales al mapa
-        userCredentials[rut] = password;
+          String password = generateRandomPassword(8); // Generar una contraseña aleatoria de 8 caracteres
+
+          // Crear el documento para cada RUT en la nueva colección 'alumnos_ruts'
+          await institutionCollectionRef.doc(rut).set({
+            'RUT': rut,
+            'password': password,
+          });
+
+          print('Contraseña generada y guardada para RUT: $rut');
+        }
       }
-
-      // Convertir el mapa de credenciales a JSON
-      String credentialsJson = jsonEncode(userCredentials);
-
-      // Mostrar el JSON en un diálogo
-      showMessage(context, 'Usuarios creados correctamente para todos los alumnos.\n\nCredenciales:\n$credentialsJson');
-    } catch (e) {
-      // Manejar errores
-      showMessage(context, 'Error al crear usuarios: $e');
     }
-  } */
+
+    print('Proceso completado para todos los documentos.');
+  } catch (e) {
+    print('Error al obtener los datos o guardar en Firestore: $e');
+  }
+}
+
+Future<void> fetchRutsAndPasswords() async {
+  try {
+    final firestore = FirebaseFirestore.instance;
+    
+    // Acceder a la subcolección 'alumnos_ruts' directamente desde la colección 'alumnos'
+    final rutsSnapshot = await firestore.collectionGroup('alumnos_ruts').get();
+
+    // Verificar si se encontraron documentos
+    if (rutsSnapshot.docs.isEmpty) {
+      print('No hay documentos en la subcolección "alumnos_ruts".');
+    } else {
+      print('Documentos encontrados en la subcolección "alumnos_ruts": ${rutsSnapshot.docs.length}');
+    }
+
+    // Iterar sobre los documentos de la subcolección 'alumnos_ruts'
+    for (var rutDoc in rutsSnapshot.docs) {
+      String rut = rutDoc['RUT'];
+      String password = rutDoc['password'];
+
+      // Imprimir RUT y contraseña en la consola
+      print('RUT: $rut, Contraseña: $password');
+    }
+
+    print('Proceso completado para todos los RUTs y contraseñas.');
+  } catch (e) {
+    print('Error al obtener los datos de los RUTs y contraseñas: $e');
+  }
+}
 
   void showMessage(BuildContext context, String message) {
     showDialog(
@@ -310,7 +352,7 @@ class _AdminSphinx extends State<AdminSphinx> {
                           const SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () async {
-                              getRutFromFirestore();
+                              getRutAndGeneratePassword();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
@@ -330,6 +372,12 @@ class _AdminSphinx extends State<AdminSphinx> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 30.0,),
+                          ElevatedButton(
+                            onPressed: () {
+                              fetchRutsAndPasswords();
+                            }, 
+                            child: Text("Creamiento"))
                         ],
                       ),
                     ),

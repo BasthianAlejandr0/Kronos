@@ -217,7 +217,8 @@ class Alumnonoregister extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                  },
                                   child: Text(
                                     'Enviar'.tr(), // Traducción aquí
                                     style: const TextStyle(
