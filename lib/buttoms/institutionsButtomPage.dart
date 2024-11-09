@@ -14,7 +14,7 @@ class institutionsButtomPage extends StatelessWidget {
         shape: LinearBorder()
       ),
       onPressed: () {
-        Navigator.pushNamed(context,'Profile');
+        Navigator.pushNamed(context,'Institutions');
       },
       child: const Text(
         'Institutions',

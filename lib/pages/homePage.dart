@@ -527,7 +527,7 @@ class HomePage extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             ElevatedButton(onPressed: () async {
-                              Navigator.pushNamed(context,'NoRegistrado');
+                              Navigator.pushNamed(context,'JoinUs');
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white, // Color del texto

@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kronos_software/buttoms/drawerNavigator.dart';
-import 'package:kronos_software/widgets/meeting.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,8 +16,13 @@ import '../buttoms/signinButtom.dart';
 import '../widgets/Idioma.dart';
 import '../widgets/formField.dart';
 
-class JoinToUs extends StatelessWidget {
-    JoinToUs({super.key});
+class JoinToUs extends StatefulWidget {
+  JoinToUs({super.key});
+  @override
+  _JoinToUsState createState() => _JoinToUsState();
+}
+
+class _JoinToUsState extends State<JoinToUs> {
 
 // Controladores para cada video
   final YoutubePlayerController _controller1 = YoutubePlayerController(
@@ -47,13 +52,83 @@ class JoinToUs extends StatelessWidget {
     ),
   )..cueVideoById(videoId: "MYPVQccHhAQ");
 
+  final TextEditingController institutionController = TextEditingController();
+  final TextEditingController principalController = TextEditingController();
+  final TextEditingController numberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
 
+  final DateTime today = DateTime.now();
+  final DateTime maxDate = DateTime.now().add(Duration(days: 14));
 
+  // Función para mostrar el TimePicker y actualizar la hora seleccionada
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime ?? TimeOfDay.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        selectedTime = picked;
+        // Actualiza el selectedDate combinando la fecha seleccionada con la hora
+        if (selectedDate != null) {
+          selectedDate = DateTime(
+            selectedDate!.year,
+            selectedDate!.month,
+            selectedDate!.day,
+            selectedTime!.hour,
+            selectedTime!.minute,
+          );
+        }
+      });
+    }
+  }
+
+  Future<void> saveMeetingData() async {
+  if (institutionController.text.trim().isNotEmpty &&
+      principalController.text.trim().isNotEmpty &&
+      numberController.text.trim().isNotEmpty &&
+      emailController.text.trim().isNotEmpty &&
+      selectedDate != null) {
+    try {
+      await FirebaseFirestore.instance.collection('reuniones').add({
+        'institution': institutionController.text.trim(),
+        'principal': principalController.text.trim(),
+        'number': numberController.text.trim(),
+        'email': emailController.text.trim(),
+        'date': selectedDate,
+      });
+
+      // Mostrar SnackBar con el mensaje en el centro de la pantalla
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Reunión guardada correctamente.'),
+          duration: Duration(seconds: 3),
+          behavior: SnackBarBehavior.floating, // Para que aparezca centrado
+          margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        ),
+      );
+
+      //print("Reunión guardada correctamente.");
+    } catch (e) {
+      print("Error al guardar la reunión: $e");
+    }
+  } else {
+    print("Campos incompletos:");
+    if (institutionController.text.trim().isEmpty) print("Falta institución");
+    if (principalController.text.trim().isEmpty) print("Falta director");
+    if (numberController.text.trim().isEmpty) print("Falta número");
+    if (emailController.text.trim().isEmpty) print("Falta email");
+    if (selectedDate == null) print("Falta fecha");
+    print("Por favor complete todos los campos.");
+  }
+}
 
   @override
+  
   Widget build(BuildContext context) {
-    final DateTime today = DateTime.now();
-    final DateTime maxDate = today.add(Duration(days: 14)); 
+    
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 235, 235, 235),
       appBar: AppBar(
@@ -189,6 +264,7 @@ class JoinToUs extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
+                  
                   Padding(
                     padding: const EdgeInsets.only(right: 0),
                     child: Column(
@@ -201,14 +277,125 @@ class JoinToUs extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                MeetingForm(),
+                                Container(
+                                  width: 300,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: const Color.fromARGB(255, 88, 88, 88),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                         child: TextField(
+                                          controller: institutionController,
+                                          style: TextStyle(color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: 'Institution name: ',
+                                            hintStyle: TextStyle(
+                                              color: Color.fromARGB(255, 255, 255, 255),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 0, 0, 0),
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 177, 174, 174),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        )
+                                      ),
+                                      Expanded(
+                                        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                         child: TextField(
+                                          controller: principalController,
+                                          style: TextStyle(color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: 'School principal name: ',
+                                            hintStyle: TextStyle(
+                                              color: Color.fromARGB(255, 255, 255, 255),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 0, 0, 0),
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 177, 174, 174),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        )
+                                      ),
+                                      Expanded(
+                                        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                         child: TextField(
+                                          controller: numberController,
+                                          style: TextStyle(color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: 'Number: ',
+                                            hintStyle: TextStyle(
+                                              color: Color.fromARGB(255, 255, 255, 255),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 0, 0, 0),
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 177, 174, 174),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        )
+                                      ),
+                                      Expanded(
+                                        child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                         child: TextField(
+                                          controller: emailController,
+                                          style: TextStyle(color: Colors.white),
+                                          decoration: InputDecoration(
+                                            hintText: 'Mail: ',
+                                            hintStyle: TextStyle(
+                                              color: Color.fromARGB(255, 255, 255, 255),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 0, 0, 0),
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color.fromARGB(255, 177, 174, 174),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        )
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(width: 10,),
                                 Container(
                                   width: 250, // Ajusta el ancho aquí
                                   height: 300, // Ajusta la altura aquí
                                   child: CalendarCarousel(
                                     onDayPressed: (DateTime date, List events) {
-                                      // Lógica para seleccionar un día
-                                      print(date);
+                                      setState(() {
+                                        selectedDate = date;
+                                      });
+                                      // Llamamos a la función para seleccionar la hora después de elegir la fecha
+                                      _selectTime(context);
                                     },
                                     daysHaveCircularBorder: true,
                                     weekendTextStyle: TextStyle(
@@ -218,11 +405,12 @@ class JoinToUs extends StatelessWidget {
                                       color: Colors.black,
                                       fontSize: 20,
                                     ),
-                                    todayButtonColor: Colors.lightBlue,
+                                    todayButtonColor: Color.fromARGB(255, 235, 235, 235),
                                     selectedDayTextStyle: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     selectedDayButtonColor: Colors.blue,
+                                    selectedDateTime: selectedDate, // Asigna la fecha seleccionada
                                       minSelectedDate: today, // Fecha mínima seleccionable
                                       maxSelectedDate: maxDate, // Fecha máxima seleccionable
                                       showOnlyCurrentMonthDate: true, // Mostrar solo fechas del mes actual
@@ -230,9 +418,6 @@ class JoinToUs extends StatelessWidget {
                                         if (date.isBefore(today) || date.isAfter(maxDate)) {
                                           // Prevenir que el calendario se mueva fuera del rango permitido
                                           // Regresar al mes actual
-                                          CalendarCarousel(
-                                            onDayPressed: (DateTime date, List events) {},
-                                          );
                                         }
                                       },
                                   ),
@@ -256,7 +441,9 @@ class JoinToUs extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    saveMeetingData();
+                                  },
                                   child: Text(
                                     'Send'.tr(),
                                     style: const TextStyle(
@@ -301,7 +488,7 @@ class JoinToUs extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 100),
+                    padding: const EdgeInsets.only(left: 40),
                     child: Column(
                       children: [
                         Image.asset(
@@ -313,36 +500,16 @@ class JoinToUs extends StatelessWidget {
                       ],
                     ),
                   ),
-                  /* const Padding(
-                    padding: EdgeInsets.only(right: 97),
-                    child: Column(
-                      children: [  
-                        Column(
-                          children: [
-                            SizedBox(height: 30),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Sphinx demostrated its great performance in the classrooms giving an increase of x% in learning to students, which translates into an increase of x% in grades, registered institutions have risen X places in the ranking of educational institutions",
-                                  //textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 4,
-                                  overflow: TextOverflow.visible
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                  const SizedBox(
+                    height: 370,
+                    child: VerticalDivider(
+                      width: 1,
+                      thickness: 1,
+                      color: Colors.black,
                     ),
-                  ), */
+                  ),
                   const Padding(
-                    padding: EdgeInsets.only(right: 97),
+                    padding: EdgeInsets.only(right: 80),
                     child: Column(
                       children: [
                         Column(

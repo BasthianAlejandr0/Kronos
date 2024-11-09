@@ -46,11 +46,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: 'Sphinx',
+      initialRoute: 'Home',
       routes: {
         'Home': (context) =>  HomePage(),
         'Admin': (context) =>  const Adminpage(),
-        'Profile': (context) =>  Alumnonoregister(),
+        'Institutions': (context) =>  Alumnonoregister(),
         'userRegister': (context) =>  const UserRegister(),
         'Sphinx': (context) =>   const AdminSphinx(),
         'JoinUs': (context) =>  JoinToUs(),
