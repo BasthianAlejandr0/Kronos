@@ -45,6 +45,8 @@ class Alumnonoregister extends StatelessWidget {
     ),
   )..cueVideoById(videoId: "MYPVQccHhAQ");
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,7 +192,7 @@ class Alumnonoregister extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 100),
+                    padding: const EdgeInsets.only(right: 114),
                     child: Column(
                       children: [
                         Text(
@@ -310,7 +312,7 @@ class Alumnonoregister extends StatelessWidget {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(right: 97),
+                    padding: EdgeInsets.only(right: 40),
                     child: Column(
                       children: [  
                         Column(
@@ -323,7 +325,7 @@ class Alumnonoregister extends StatelessWidget {
                                   "1.- Llena el formulario. \n2.- Comunícate con el/la Director(a) de tu institución. \n3.- Crea tu cuenta. \n4.- Pronto tendrás tus informes actualizados en tu perfil.",
                                   //textAlign: TextAlign.justify, // Alinea el texto para mejorar la presentación
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 )
@@ -525,7 +527,7 @@ class Alumnonoregister extends StatelessWidget {
                         const Text(
                               "Gracias!",
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 40,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

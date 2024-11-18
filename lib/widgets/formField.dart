@@ -189,9 +189,6 @@ class _DropDownInstitutionsState extends State<DropDownInstitutions> {
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: verifyRutAndPassword, 
-            child: Text("Verificar asexo"))
         ],
       ),
     );

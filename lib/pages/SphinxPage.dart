@@ -373,11 +373,11 @@ class _AdminSphinx extends State<AdminSphinx> {
                             ),
                           ),
                           SizedBox(height: 30.0,),
-                          ElevatedButton(
+                          /* ElevatedButton(
                             onPressed: () {
                               fetchRutsAndPasswords();
                             }, 
-                            child: Text("Creamiento"))
+                            child: Text("Creamiento")) */
                         ],
                       ),
                     ),

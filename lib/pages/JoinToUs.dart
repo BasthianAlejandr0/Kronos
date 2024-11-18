@@ -64,26 +64,30 @@ class _JoinToUsState extends State<JoinToUs> {
 
   // Función para mostrar el TimePicker y actualizar la hora seleccionada
   Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: selectedTime ?? TimeOfDay.now(),
-    );
-    if (picked != null) {
+  TimeOfDay initialTime = TimeOfDay(hour: 8, minute: 0); // Hora inicial en 8:00
+  TimeOfDay? pickedTime = await showTimePicker(
+    context: context,
+    initialTime: initialTime,
+    helpText: 'Selecciona una hora entre 8:00 y 18:00',
+  );
+
+  if (pickedTime != null) {
+    if (pickedTime.hour >= 8 && pickedTime.hour < 18) {
       setState(() {
-        selectedTime = picked;
-        // Actualiza el selectedDate combinando la fecha seleccionada con la hora
-        if (selectedDate != null) {
-          selectedDate = DateTime(
-            selectedDate!.year,
-            selectedDate!.month,
-            selectedDate!.day,
-            selectedTime!.hour,
-            selectedTime!.minute,
-          );
-        }
+        selectedTime = pickedTime;
       });
+      print("Hora seleccionada: ${pickedTime.format(context)}");
+    } else {
+      // Mostrar mensaje de error si la hora está fuera del rango
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Por favor selecciona una hora entre 8:00 y 18:00'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
+}
 
   Future<void> saveMeetingData() async {
   if (institutionController.text.trim().isNotEmpty &&
