@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kronos_software/firebase_options.dart';
-
 import 'pages/homePage.dart';
 import 'pages/SphinxPage.dart';
 import 'pages/adminPage.dart';

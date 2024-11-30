@@ -14,7 +14,6 @@ import '../buttoms/loginButtom.dart';
 import '../buttoms/projetsButtomPage.dart';
 import '../buttoms/signinButtom.dart';
 import '../widgets/Idioma.dart';
-import '../widgets/formField.dart';
 
 class JoinToUs extends StatefulWidget {
   JoinToUs({super.key});
@@ -569,14 +568,47 @@ class _JoinToUsState extends State<JoinToUs> {
                         SizedBox(
                           width: videoWidth,
                           height: 250,
-                          child: YoutubePlayerControllerProvider(
-                            controller: _controller1,
-                            child: YoutubePlayer(controller: _controller1),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
                           ),
+                            // child: YoutubePlayerControllerProvider(
+                            //   controller: _controller1,
+                            //   child: YoutubePlayer(controller: _controller1),
+                            // ),
+                          ),
+                          // child: YoutubePlayerControllerProvider(
+                          //   controller: _controller1,
+                          //   child: YoutubePlayer(controller: _controller1),
+                          // ),
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 180, 176, 176),
                               borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(5),
@@ -592,10 +624,10 @@ class _JoinToUsState extends State<JoinToUs> {
                               ],
                             ),
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Learning statistics',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -604,7 +636,7 @@ class _JoinToUsState extends State<JoinToUs> {
                                   color: Colors.black),
                               ),
                               SizedBox(height: 10.0),
-                              const Text(
+                              Text(
                                 'A look at the learning growth statistics of students from registered and non-registered institutions',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -623,10 +655,24 @@ class _JoinToUsState extends State<JoinToUs> {
                         SizedBox(
                           width: videoWidth,
                           height: 250,
-                          child: YoutubePlayerControllerProvider(
-                            controller: _controller2,
-                            child: YoutubePlayer(controller: _controller2),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
                           ),
+                          // child: YoutubePlayerControllerProvider(
+                          //   controller: _controller2,
+                          //   child: YoutubePlayer(controller: _controller2),
+                          // ),
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
@@ -677,10 +723,24 @@ class _JoinToUsState extends State<JoinToUs> {
                         SizedBox(
                           width: videoWidth,
                           height: 250,
-                          child: YoutubePlayerControllerProvider(
-                            controller: _controller4,
-                            child: YoutubePlayer(controller: _controller4),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
                           ),
+                          // child: YoutubePlayerControllerProvider(
+                          //   controller: _controller4,
+                          //   child: YoutubePlayer(controller: _controller4),
+                          // ),
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,

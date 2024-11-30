@@ -355,10 +355,24 @@ class Alumnonoregister extends StatelessWidget {
                         SizedBox(
                           width: videoWidth,
                           height: 250,
-                          child: YoutubePlayerControllerProvider(
-                            controller: _controller1,
-                            child: YoutubePlayer(controller: _controller1),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
                           ),
+                          // child: YoutubePlayerControllerProvider(
+                          //   controller: _controller1,
+                          //   child: YoutubePlayer(controller: _controller1),
+                          // ),
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
@@ -409,10 +423,24 @@ class Alumnonoregister extends StatelessWidget {
                         SizedBox(
                           width: videoWidth,
                           height: 250,
-                          child: YoutubePlayerControllerProvider(
-                            controller: _controller2,
-                            child: YoutubePlayer(controller: _controller2),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
                           ),
+                          // child: YoutubePlayerControllerProvider(
+                          //   controller: _controller2,
+                          //   child: YoutubePlayer(controller: _controller2),
+                          // ),
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
@@ -463,10 +491,24 @@ class Alumnonoregister extends StatelessWidget {
                         SizedBox(
                           width: videoWidth,
                           height: 250,
-                          child: YoutubePlayerControllerProvider(
-                            controller: _controller4,
-                            child: YoutubePlayer(controller: _controller4),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 180, 176, 176),
+                              borderRadius: BorderRadius.circular(5),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2, // Propagación de la sombra
+                                  blurRadius: 5, // Difuminado de la sombra
+                                  offset: Offset(0, 3), // Desplazamiento en los ejes X e Y
+                                ),
+                              ],
+                            ),
                           ),
+                          // child: YoutubePlayerControllerProvider(
+                          //   controller: _controller4,
+                          //   child: YoutubePlayer(controller: _controller4),
+                          // ),
                         ), // Espacio entre el video y el texto
                         Container(
                           width: videoWidth,
